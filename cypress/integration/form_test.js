@@ -1,4 +1,8 @@
 describe("Order Pizza App", () => {
+    const fnameInput = () => cy.get("input[name='fname']")
+    const lnameInput = () => cy.get("input[name='lname']")
+    const sizeSelect = () => cy.get("select[name='pizzaSize']")
+    const submitButton = () => cy.get("button")
 
     it("can navigate to http://localhost:3001/order-form", () => {
         cy.visit("http://localhost:3001/order-form")
@@ -9,7 +13,22 @@ describe("Order Pizza App", () => {
         cy.get("input[name='fname']")
         .type("Cardi")
         .should("have.value", "Cardi")
-        lnameInput().type("Belcalis").should("have.value", "Belcalis")
+    })
+
+    it("can type something in the 'text' input", () => {
+        cy.get("input[name='lname']")
+        .type("Belcalis")
+        .should("have.value", "Belcalis")
+    })
+
+    it("can type email in the 'text' input", () => {
+        cy.get("input[name='email']")
+        .type("cardib@email.com")
+        .should("have.value", "cardib@email.com")
+    })
+
+    it("can select size", () => {
+        sizeSelect().select(["small"]).should("have.value", "small")  
     })
 
     it("terms of service checkbox functional", () => {
@@ -22,4 +41,3 @@ describe("Order Pizza App", () => {
         submitButton().click()
           })
     })
-})

@@ -124,9 +124,9 @@ const OrderForm = () => {
   //fetching current order list data
   const getOrders = () => {
     axios
-      .get("https://reqres.in/")
+      .get("https://reqres.in/api/users")
       .then((response) => {
-        setOrders(response.data);
+        setOrders(response.data.data);
       })
       .catch((error) => {
         debugger;
@@ -136,12 +136,13 @@ const OrderForm = () => {
   //posting new order to database and console logging updated orders list
   const postNewOrder = (newOrder) => {
     axios
-      .post("https://reqres.in/", newOrder)
+      .post("https://reqres.in/api/users", newOrder)
       .then((response) => {
         setOrders([...orders, response.data]);
       })
       .catch((error) => {
-        alert("Order could not be placed at this time.");
+        console.log("error", error)
+        debugger
       })
       .finally(() => {
         console.log(orders);
